@@ -2,6 +2,9 @@
 // Created by ANSHUL KUMAR NEEKHARA on 25-06-2024.
 //
 
+#include <bits/stdc++.h>
+using namespace  std ;
+
 #ifndef GENERICRUBICSCUBE_H
 #define GENERICRUBICSCUBE_H
 
@@ -48,45 +51,45 @@ public:
 
     vector<MOVE> randomShuffleCube(unsigned int times);
 
-    RubiksCube &move(MOVE ind);
+    GenericRubicsCube &move(MOVE ind);
 
-    RubiksCube &invert(MOVE ind);
+    GenericRubicsCube &invert(MOVE ind);
 
-    virtual RubiksCube &f() = 0;
+    virtual GenericRubicsCube &f() = 0;
 
-    virtual RubiksCube &fPrime() = 0;
+    virtual GenericRubicsCube &fPrime() = 0;
 
-    virtual RubiksCube &f2() = 0;
+    virtual GenericRubicsCube &f2() = 0;
 
-    virtual RubiksCube &u() = 0;
+    virtual GenericRubicsCube &u() = 0;
 
-    virtual RubiksCube &uPrime() = 0;
+    virtual GenericRubicsCube &uPrime() = 0;
 
-    virtual RubiksCube &u2() = 0;
+    virtual GenericRubicsCube &u2() = 0;
 
-    virtual RubiksCube &l() = 0;
+    virtual GenericRubicsCube &l() = 0;
 
-    virtual RubiksCube &lPrime() = 0;
+    virtual GenericRubicsCube &lPrime() = 0;
 
-    virtual RubiksCube &l2() = 0;
+    virtual GenericRubicsCube &l2() = 0;
 
-    virtual RubiksCube &r() = 0;
+    virtual GenericRubicsCube &r() = 0;
 
-    virtual RubiksCube &d() = 0;
+    virtual GenericRubicsCube &d() = 0;
 
-    virtual RubiksCube &dPrime() = 0;
+    virtual GenericRubicsCube &dPrime() = 0;
 
-    virtual RubiksCube &d2() = 0;
+    virtual GenericRubicsCube &d2() = 0;
 
-    virtual RubiksCube &rPrime() = 0;
+    virtual GenericRubicsCube &rPrime() = 0;
 
-    virtual RubiksCube &r2() = 0;
+    virtual GenericRubicsCube &r2() = 0;
 
-    virtual RubiksCube &b() = 0;
+    virtual GenericRubicsCube &b() = 0;
 
-    virtual RubiksCube &bPrime() = 0;
+    virtual GenericRubicsCube &bPrime() = 0;
 
-    virtual RubiksCube &b2() = 0;
+    virtual GenericRubicsCube &b2() = 0;
 
     string getCornerColorString(uint8_t ind) const;
 
