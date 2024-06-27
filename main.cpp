@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std ;
 
 #include "Model/RubicsCube3dArray.cpp"
@@ -6,6 +7,7 @@ using namespace std ;
 #include "Model/RubicsCubeBitBoard.cpp"
 #include "./Solver/DFSSolver.h"
 #include "./Solver/BFSSolver.h"
+#include "Solver/IDDFSSolver.h"
 
 int main()
 {
@@ -435,48 +437,92 @@ int main()
 
 
 
-    //BFS Solver -----------------------------------------------------------------------------------------------------
+    // //BFS Solver -----------------------------------------------------------------------------------------------------
+    // RubiksCubeBitboard cube;
+    // // cube.print();
+    //
+    // int suffleTime = 5  ;
+    //
+    // vector<GenericRubicsCube::MOVE> shuffle_moves = cube.randomShuffleCube(suffleTime);
+    // for(auto move: shuffle_moves) cout << cube.getMove(move) << " ";
+    // cout << "\n";
+    // // cube.print();
+    //
+    // BFSSolver<RubiksCubeBitboard, HashBitboard> bfsSolver(cube);
+    // vector<GenericRubicsCube::MOVE> solve_moves = bfsSolver.solve();
+    //
+    // cout << "Cube is solved in " << solve_moves.size() << " moves." << endl ;
+    // cout << "Moves are : { " ;
+    // for (auto move: solve_moves) cout << cube.getMove(move) << " ";
+    // cout << "}\n";
+    // // bfsSolver.rubiksCube.print();
+    //
+    // cube = bfsSolver.rubiksCube ;
+    // if ( cube.isSolved()) cout << "SOLVED\n\n";
+    // else cout << "NOT SOLVED\n\n";
+    //
+    //
+    // // Min no of moves
+    // // F B' B2
+    // // Moves are : { F' B' }
+    // // U' R' R
+    // // Moves are : { U }
+    // // R U2 U U2
+    // // Moves are : { U' R' }
+    // // R2 F' U' U U'
+    // // Moves are : { U F R2 }
+    // // F F2 B D D'
+    // // Moves are : { F B' }
+    // // R' R' R2 D U' B2
+    // // Moves are : { B2 U D' }
+    // // F2 B F2 F2 F F'
+    // // Moves are : { F2 B' }
+    // // L F2 B D F2 R' --> ????
+
+
+
+    // IDDFS Solver ----------------------------------------------------------------------------------------------------
     RubiksCubeBitboard cube;
     // cube.print();
 
-    int suffleTime = 5  ;
+    int suffleTime = 6  ;
+    int max_search_depth = 6 ;
 
     vector<GenericRubicsCube::MOVE> shuffle_moves = cube.randomShuffleCube(suffleTime);
-    for(auto move: shuffle_moves) cout << cube.getMove(move) << " ";
+    for (auto move: shuffle_moves) cout << cube.getMove(move) << " ";
     cout << "\n";
     // cube.print();
 
-    BFSSolver<RubiksCubeBitboard, HashBitboard> bfsSolver(cube);
-    vector<GenericRubicsCube::MOVE> solve_moves = bfsSolver.solve();
+    IDDFSSolver<RubiksCubeBitboard, HashBitboard> iddfsSolver(cube, max_search_depth);
+    vector<GenericRubicsCube::MOVE> solve_moves = iddfsSolver.solve();
+
 
     cout << "Cube is solved in " << solve_moves.size() << " moves." << endl ;
     cout << "Moves are : { " ;
     for (auto move: solve_moves) cout << cube.getMove(move) << " ";
     cout << "}\n";
-    // bfsSolver.rubiksCube.print();
+    // iddfsSolver.rubiksCube.print();
 
-    cube = bfsSolver.rubiksCube ;
+    cube = iddfsSolver.rubiksCube ;
     if ( cube.isSolved()) cout << "SOLVED\n\n";
     else cout << "NOT SOLVED\n\n";
 
-
-    // Min no of moves
-    // F B' B2
-    // Moves are : { F' B' }
-    // U' R' R
-    // Moves are : { U }
-    // R U2 U U2
-    // Moves are : { U' R' }
-    // R2 F' U' U U'
-    // Moves are : { U F R2 }
-    // F F2 B D D'
-    // Moves are : { F B' }
-    // R' R' R2 D U' B2
-    // Moves are : { B2 U D' }
-    // F2 B F2 F2 F F'
+    // U2 U' B2 F' B' F'
+    // Cube is solved in 3 moves.
+    // Moves are : { F2 B' U' }
+    // SOLVED
+    // B L2 F F' L2 F2
+    // cube can not be solved in 1 moves.
+    // Cube is solved in 2 moves.
     // Moves are : { F2 B' }
-    // L F2 B D F2 R' --> ????
-
+    // SOLVED
+    // D2 B' B F' U2 L2
+    // cube can not be solved in 1 moves.
+    // cube can not be solved in 2 moves.
+    // cube can not be solved in 3 moves.
+    // Cube is solved in 4 moves.
+    // Moves are : { L2 U2 F D2 }
+    // SOLVED
 
 
 

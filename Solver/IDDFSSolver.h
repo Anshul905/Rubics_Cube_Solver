@@ -33,6 +33,8 @@ public:
             if (dfsSolver.rubiksCube.isSolved()) {
                 rubiksCube = dfsSolver.rubiksCube;
                 break;
+            }else {
+                cout << "cube can not be solved in " << i << " moves."<< endl ;
             }
         }
         return moves;

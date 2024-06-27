@@ -44,7 +44,6 @@ public:
 
     vector<GenericRubicsCube::MOVE> solve() {
         dfs(1);
-        cout<< "OK" << endl;
         return moves;
     }
 
