@@ -21,14 +21,15 @@ private:
 
     //    DFS code to find the solution (helper function)
     bool dfs(int dep) {
+        // cout << dep << endl ;
         if (rubiksCube.isSolved()) return true;
         if (dep > max_search_depth) return false;
         for (int i = 0; i < 18; i++) {
             rubiksCube.move(GenericRubicsCube::MOVE(i));
             moves.push_back(GenericRubicsCube::MOVE(i));
             if (dfs(dep + 1)) return true;
-            moves.pop_back();
-            rubiksCube.invert(GenericRubicsCube::MOVE(i));
+            moves.pop_back(); // remove the last move
+            rubiksCube.invert(GenericRubicsCube::MOVE(i)); // back to prevoius state
         }
         return false;
     }
@@ -43,6 +44,7 @@ public:
 
     vector<GenericRubicsCube::MOVE> solve() {
         dfs(1);
+        cout<< "OK" << endl;
         return moves;
     }
 

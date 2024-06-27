@@ -5,11 +5,13 @@ using namespace std ;
 #include "Model/RubicsCube1dArray.cpp"
 #include "Model/RubicsCubeBitBoard.cpp"
 
+
+#include "./Solver/DFSSolver.h"
 int main()
 {
 
-    RubiksCube3dArray object3DArray;
-    object3DArray.print();
+    // RubiksCube3dArray object3DArray;
+    // object3DArray.print();
 
 
     // ############  3D ############
@@ -405,9 +407,31 @@ int main()
 
 
 
+    // DFS Solver Testing __________________________________________________________________________________________
+       RubiksCube3dArray cube;
+       // cube.print();
+
+      int suffleTime = 7  ;
+      int max_search_depth = 6 ;
 
 
+       vector<GenericRubicsCube::MOVE> shuffle_moves = cube.randomShuffleCube(suffleTime);
+       for (auto move: shuffle_moves) cout << cube.getMove(move) << " ";
+       cout << "\n";
+       cube.print();
 
+
+       DFSSolver<RubiksCube3dArray, Hash3d> dfsSolver(cube,max_search_depth);
+       vector<GenericRubicsCube::MOVE> solve_moves = dfsSolver.solve();
+    
+       cout << "Moves are : { " ;
+       for (auto move: solve_moves) cout << cube.getMove(move) << " ";
+       cout << "}\n";
+       // dfsSolver.rubiksCube.print();
+
+        cube = dfsSolver.rubiksCube ;
+        if ( cube.isSolved()) cout << "SOLVED\n\n";
+        else cout << "NOT SOLVED\n\n";
 
 
     return 0;
