@@ -4,7 +4,6 @@ using namespace std ;
 #include "Model/RubicsCube3dArray.cpp"
 #include "Model/RubicsCube1dArray.cpp"
 #include "Model/RubicsCubeBitBoard.cpp"
-
 #include "./Solver/DFSSolver.h"
 #include "./Solver/BFSSolver.h"
 
@@ -234,7 +233,6 @@ int main()
        //
        // if (mp1[cube2]) cout << "Cube2 is present\n";
        // else cout << "Cube2 is not present\n";
-
 
 
 
