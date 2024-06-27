@@ -35,11 +35,15 @@ private:
             for (int i = 0; i < 18; i++) {
                 auto curr_move = GenericRubicsCube::MOVE(i);
                 cur_cube.move(curr_move);
+
+                // Prune unnecessary moves by checking if the new state has been visited
                 if (!visited[cur_cube]) {
                     visited[cur_cube] = true;
-                    move_done[cur_cube] = curr_move;
+                    move_done[cur_cube] = curr_move ;
                     q.push(cur_cube);
                 }
+
+                // Invert the move to restore the original state
                 cur_cube.invert(curr_move);
             }
         }
