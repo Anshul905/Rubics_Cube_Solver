@@ -230,6 +230,8 @@ public:
         return *this;
     }
 
+
+
     bool operator==(const RubiksCube3dArray &r1) const {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 3; j++) {
@@ -241,7 +243,7 @@ public:
         return true;
     }
 
-    RubiksCube3dArray &operator=(const RubiksCube3dArray &r1) {
+    RubiksCube3dArray& operator=(const RubiksCube3dArray &r1) {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 3; j++) {
                 for (int k = 0; k < 3; k++) {
@@ -253,6 +255,7 @@ public:
     }
 
 };
+
 
 struct Hash3d {
     size_t operator()(const RubiksCube3dArray &r1) const {
@@ -266,5 +269,4 @@ struct Hash3d {
         }
         return hash<string>()(str);
     }
-
 };

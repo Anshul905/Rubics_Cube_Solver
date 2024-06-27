@@ -300,6 +300,7 @@ public:
         return *this;
     }
 
+
     bool operator==(const RubiksCubeBitboard &r1) const {
         for (int i = 0; i < 6; i++) {
             if (bitboard[i] != r1.bitboard[i]) return false;

@@ -8,6 +8,10 @@ using namespace std ;
 int main()
 {
 
+    RubiksCube3dArray object3DArray;
+    object3DArray.print();
+
+
     // ############  3D ############
 
     // RubiksCube3dArray object3DArray;
@@ -362,24 +366,24 @@ int main()
 
     // RubiksCube3dArray cube1 , cube2 ;
     // RubiksCube1dArray cube1 , cube2;
-    RubiksCubeBitboard cube1 , cube2;
+    // RubiksCubeBitboard cube1 , cube2;
 
 
 
 //  Equality and assignment of cubes --------------------------------------------------------------------------
 
-    if(cube1 == cube2) cout << "Is equal\n";
-    else cout << "Not Equal\n";
-
-    cube1.randomShuffleCube(1);
-
-    if(cube1 == cube2) cout << "Is equal\n";
-    else cout << "Not Equal\n";
-
-    cube2 = cube1;
-
-    if(cube1 == cube2) cout << "Is equal\n";
-    else cout << "Not Equal\n";
+    // if(cube1 == cube2) cout << "Is equal\n";
+    // else cout << "Not Equal\n";
+    //
+    // cube1.randomShuffleCube(1);
+    //
+    // if(cube1 == cube2) cout << "Is equal\n";
+    // else cout << "Not Equal\n";
+    //
+    // cube2 = cube1;
+    //
+    // if(cube1 == cube2) cout << "Is equal\n";
+    // else cout << "Not Equal\n";
 
 
 //  Unordered_map of Cubes  ------------------------------------------------------------------------------------
@@ -387,15 +391,15 @@ int main()
 
     // unordered_map<RubiksCube3dArray, bool, Hash3d> mp1;
     // unordered_map<RubiksCube1dArray, bool, Hash1d> mp1;
-    unordered_map<RubiksCubeBitboard, bool, HashBitboard> mp1;
+    // unordered_map<RubiksCubeBitboard, bool, HashBitboard> mp1;
 
-    mp1[cube1] = true;
-    cube2.randomShuffleCube(8);
-    if (mp1[cube1]) cout << "Cube1 is present\n";
-    else cout << "Cube1 is not present\n";
-
-    if (mp1[cube2]) cout << "Cube2 is present\n";
-    else cout << "Cube2 is not present\n";
+    // mp1[cube1] = true;
+    // cube2.randomShuffleCube(8);
+    // if (mp1[cube1]) cout << "Cube1 is present\n";
+    // else cout << "Cube1 is not present\n";
+    //
+    // if (mp1[cube2]) cout << "Cube2 is present\n";
+    // else cout << "Cube2 is not present\n";
 
 
 
