@@ -1,7 +1,7 @@
 # ninja log v6
 77	5102	7411784424986353	CMakeFiles/Rubics_Cube_Solver.dir/Model/RubicsCubeBitBoard.cpp.obj	f1301b63dc4f64fb
 219	5901	7411742228879646	CMakeFiles/Rubics_Cube_Solver.dir/Model/RubicsCube1dArray.cpp.obj	ef0f1e6884ff6945
-7	487	7413069882245820	build.ninja	9348b828ce150e28
+7	487	7413084436307588	build.ninja	9348b828ce150e28
 12	4462	7413034277332256	CMakeFiles/Rubics_Cube_Solver.dir/main.cpp.obj	adf27ad0e3a9ba5a
 4463	4723	7413034321839007	Rubics_Cube_Solver.exe	b90b14b55d2b00db
 63	4932	7413009387351616	CMakeFiles/Rubics_Cube_Solver.dir/Model/GenericRubicsCube.cpp.obj	7fbe33b6177a9a6d
