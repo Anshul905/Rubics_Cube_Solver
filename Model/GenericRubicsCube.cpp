@@ -267,3 +267,46 @@ string GenericRubicsCube::getCornerColorString(uint8_t ind) const {
     return str;
 }
 
+uint8_t GenericRubicsCube::getCornerIndex(uint8_t ind) const {
+    string corner = getCornerColorString(ind);
+
+    uint8_t ret = 0;
+    for (auto c: corner) {
+        if (c != 'W' && c != 'Y') continue;
+        if (c == 'Y') {
+            ret |= (1 << 2);
+        }
+    }
+
+    for (auto c: corner) {
+        if (c != 'R' && c != 'O') continue;
+        if (c == 'O') {
+            ret |= (1 << 1);
+        }
+    }
+
+    for (auto c: corner) {
+        if (c != 'B' && c != 'G') continue;
+        if (c == 'G') {
+            ret |= (1 << 0);
+        }
+    }
+    return ret;
+}
+
+uint8_t GenericRubicsCube::getCornerOrientation(uint8_t ind) const {
+    string corner = getCornerColorString(ind);
+
+    string actual_str = "";
+
+    for (auto c: corner) {
+        if (c != 'W' && c != 'Y') continue;
+        actual_str.push_back(c);
+    }
+
+    if (corner[1] == actual_str[0]) {
+        return 1;
+    } else if (corner[2] == actual_str[0]) {
+        return 2;
+    } else return 0;
+}
