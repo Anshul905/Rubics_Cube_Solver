@@ -1,15 +1,15 @@
 #include <bits/stdc++.h>
 
-#include "Solver/IDASTARSolver.h"
 
 using namespace std ;
 
 #include "Model/RubicsCube3dArray.cpp"
 #include "Model/RubicsCube1dArray.cpp"
 #include "Model/RubicsCubeBitBoard.cpp"
-#include "./Solver/DFSSolver.h"
-#include "./Solver/BFSSolver.h"
+#include "Solver/DFSSolver.h"
+#include "Solver/BFSSolver.h"
 #include "Solver/IDDFSSolver.h"
+#include "Solver/IDASTARSolver.h"
 
 int main()
 {
@@ -414,7 +414,7 @@ int main()
     //    RubiksCube3dArray cube;
     //    // cube.print();
     //
-    //   int suffleTime = 7  ;
+    //   int suffleTime = 4  ;
     //   int max_search_depth = 6 ;
     //
     //
@@ -435,7 +435,7 @@ int main()
     //     cube = dfsSolver.rubiksCube ;
     //     if ( cube.isSolved()) cout << "SOLVED\n\n";
     //     else cout << "NOT SOLVED\n\n";
-    //
+
 
 
 
@@ -531,13 +531,13 @@ int main()
     // IDA* SOLVER ---------------------------------------------------------------------------------------------------
     RubiksCubeBitboard cube;
     // cube.print();
-    
-    int suffleTime = 6  ;
+
+    int suffleTime = 5  ;
     vector<GenericRubicsCube::MOVE> shuffle_moves = cube.randomShuffleCube(suffleTime);
     for (auto move: shuffle_moves) cout << cube.getMove(move) << " ";
     cout << "\n";
     // cube.print();
-    
+
     IDAstarSolver<RubiksCubeBitboard, HashBitboard> idAstarSolver(cube);
     vector<GenericRubicsCube::MOVE> solve_moves = idAstarSolver.solve();
 
