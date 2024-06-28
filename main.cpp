@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 
+#include "Solver/IDASTARSolver.h"
+
 using namespace std ;
 
 #include "Model/RubicsCube3dArray.cpp"
@@ -481,50 +483,84 @@ int main()
 
 
 
-    // IDDFS Solver ----------------------------------------------------------------------------------------------------
+    // // IDDFS Solver ----------------------------------------------------------------------------------------------------
+    // RubiksCubeBitboard cube;
+    // // cube.print();
+    //
+    // int suffleTime = 6  ;
+    // int max_search_depth = 6 ;
+    //
+    // vector<GenericRubicsCube::MOVE> shuffle_moves = cube.randomShuffleCube(suffleTime);
+    // for (auto move: shuffle_moves) cout << cube.getMove(move) << " ";
+    // cout << "\n";
+    // // cube.print();
+    //
+    // IDDFSSolver<RubiksCubeBitboard, HashBitboard> iddfsSolver(cube, max_search_depth);
+    // vector<GenericRubicsCube::MOVE> solve_moves = iddfsSolver.solve();
+    //
+    //
+    // cout << "Cube is solved in " << solve_moves.size() << " moves." << endl ;
+    // cout << "Moves are : { " ;
+    // for (auto move: solve_moves) cout << cube.getMove(move) << " ";
+    // cout << "}\n";
+    // // iddfsSolver.rubiksCube.print();
+    //
+    // cube = iddfsSolver.rubiksCube ;
+    // if ( cube.isSolved()) cout << "SOLVED\n\n";
+    // else cout << "NOT SOLVED\n\n";
+    //
+    // // U2 U' B2 F' B' F'
+    // // Cube is solved in 3 moves.
+    // // Moves are : { F2 B' U' }
+    // // SOLVED
+    // // B L2 F F' L2 F2
+    // // cube can not be solved in 1 moves.
+    // // Cube is solved in 2 moves.
+    // // Moves are : { F2 B' }
+    // // SOLVED
+    // // D2 B' B F' U2 L2
+    // // cube can not be solved in 1 moves.
+    // // cube can not be solved in 2 moves.
+    // // cube can not be solved in 3 moves.
+    // // Cube is solved in 4 moves.
+    // // Moves are : { L2 U2 F D2 }
+    // // SOLVED
+
+
+
+    // IDA* SOLVER ---------------------------------------------------------------------------------------------------
     RubiksCubeBitboard cube;
     // cube.print();
-
+    
     int suffleTime = 6  ;
-    int max_search_depth = 6 ;
-
     vector<GenericRubicsCube::MOVE> shuffle_moves = cube.randomShuffleCube(suffleTime);
     for (auto move: shuffle_moves) cout << cube.getMove(move) << " ";
     cout << "\n";
     // cube.print();
-
-    IDDFSSolver<RubiksCubeBitboard, HashBitboard> iddfsSolver(cube, max_search_depth);
-    vector<GenericRubicsCube::MOVE> solve_moves = iddfsSolver.solve();
-
+    
+    IDAstarSolver<RubiksCubeBitboard, HashBitboard> idAstarSolver(cube);
+    vector<GenericRubicsCube::MOVE> solve_moves = idAstarSolver.solve();
 
     cout << "Cube is solved in " << solve_moves.size() << " moves." << endl ;
     cout << "Moves are : { " ;
     for (auto move: solve_moves) cout << cube.getMove(move) << " ";
     cout << "}\n";
-    // iddfsSolver.rubiksCube.print();
 
-    cube = iddfsSolver.rubiksCube ;
+    // idAstarSolver.rubiksCube.print();
+
+    cube = idAstarSolver.rubiksCube ;
     if ( cube.isSolved()) cout << "SOLVED\n\n";
     else cout << "NOT SOLVED\n\n";
 
-    // U2 U' B2 F' B' F'
-    // Cube is solved in 3 moves.
-    // Moves are : { F2 B' U' }
-    // SOLVED
-    // B L2 F F' L2 F2
-    // cube can not be solved in 1 moves.
-    // Cube is solved in 2 moves.
-    // Moves are : { F2 B' }
-    // SOLVED
-    // D2 B' B F' U2 L2
-    // cube can not be solved in 1 moves.
-    // cube can not be solved in 2 moves.
-    // cube can not be solved in 3 moves.
+
+    // R R' D2 R U L'
     // Cube is solved in 4 moves.
-    // Moves are : { L2 U2 F D2 }
+    // Moves are : { L U' R' D2 }
     // SOLVED
-
-
+    // U F' F2 F' L U'
+    // Cube is solved in 3 moves.
+    // Moves are : { U L' U' }
+    // SOLVED
 
     return 0;
 }
