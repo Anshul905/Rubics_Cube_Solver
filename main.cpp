@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 
+#include "PatternDatabases/CornerPatternDatabase.h"
+
 
 using namespace std ;
 
@@ -528,39 +530,74 @@ int main()
 
 
 
-    // IDA* SOLVER ---------------------------------------------------------------------------------------------------
+    // // IDA* SOLVER ---------------------------------------------------------------------------------------------------
+    // RubiksCubeBitboard cube;
+    // // cube.print();
+    //
+    // int suffleTime = 5  ;
+    // vector<GenericRubicsCube::MOVE> shuffle_moves = cube.randomShuffleCube(suffleTime);
+    // for (auto move: shuffle_moves) cout << cube.getMove(move) << " ";
+    // cout << "\n";
+    // // cube.print();
+    //
+    // IDAstarSolver<RubiksCubeBitboard, HashBitboard> idAstarSolver(cube);
+    // vector<GenericRubicsCube::MOVE> solve_moves = idAstarSolver.solve();
+    //
+    // cout << "Cube is solved in " << solve_moves.size() << " moves." << endl ;
+    // cout << "Moves are : { " ;
+    // for (auto move: solve_moves) cout << cube.getMove(move) << " ";
+    // cout << "}\n";
+    //
+    // // idAstarSolver.rubiksCube.print();
+    //
+    // cube = idAstarSolver.rubiksCube ;
+    // if ( cube.isSolved()) cout << "SOLVED\n\n";
+    // else cout << "NOT SOLVED\n\n";
+    //
+    //
+    // // R R' D2 R U L'
+    // // Cube is solved in 4 moves.
+    // // Moves are : { L U' R' D2 }
+    // // SOLVED
+    // // U F' F2 F' L U'
+    // // Cube is solved in 3 moves.
+    // // Moves are : { U L' U' }
+    // // SOLVED
+
+
+
+    // CornerPatternDatabase Testing ---------------------------------------------------------------------------------
+
+    CornerPatternDatabase cornerDB;
     RubiksCubeBitboard cube;
-    // cube.print();
 
-    int suffleTime = 5  ;
-    vector<GenericRubicsCube::MOVE> shuffle_moves = cube.randomShuffleCube(suffleTime);
-    for (auto move: shuffle_moves) cout << cube.getMove(move) << " ";
-    cout << "\n";
-    // cube.print();
+    cube.print();
+    cout << (int)cornerDB.getNumMoves(cube) << "\n";
 
-    IDAstarSolver<RubiksCubeBitboard, HashBitboard> idAstarSolver(cube);
-    vector<GenericRubicsCube::MOVE> solve_moves = idAstarSolver.solve();
+    cornerDB.setNumMoves(cube, 5);
+    cube.print();
+    cout << (int)cornerDB.getNumMoves(cube) << "\n";
 
-    cout << "Cube is solved in " << solve_moves.size() << " moves." << endl ;
-    cout << "Moves are : { " ;
-    for (auto move: solve_moves) cout << cube.getMove(move) << " ";
-    cout << "}\n";
+    cube.randomShuffleCube(1);
+    cube.print();
+    cout << (int)cornerDB.getNumMoves(cube) << "\n";
 
-    // idAstarSolver.rubiksCube.print();
+    cornerDB.setNumMoves(cube, 6);
+    cube.print();
+    cout << (int)cornerDB.getNumMoves(cube) << "\n";
 
-    cube = idAstarSolver.rubiksCube ;
-    if ( cube.isSolved()) cout << "SOLVED\n\n";
-    else cout << "NOT SOLVED\n\n";
+    cube.randomShuffleCube(10);
+    cube.print();
+    cout << (int)cornerDB.getNumMoves(cube) << "\n";
 
+    cornerDB.setNumMoves(cube, 8);
+    cube.print();
+    cout << (int)cornerDB.getNumMoves(cube) << "\n";
 
-    // R R' D2 R U L'
-    // Cube is solved in 4 moves.
-    // Moves are : { L U' R' D2 }
-    // SOLVED
-    // U F' F2 F' L U'
-    // Cube is solved in 3 moves.
-    // Moves are : { U L' U' }
-    // SOLVED
+    cube.randomShuffleCube(3);
+    cube.print();
+    cout << (int)cornerDB.getNumMoves(cube) << "\n";
+
 
     return 0;
 }
