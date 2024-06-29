@@ -4,8 +4,11 @@
 
 
 #include<bits/stdc++.h>
+using namespace std ;
+
 #include "../Model/GenericRubicsCube.h"
-#include "../Model/PatternDatabase/PatternDatabase.h"
+// #include "../Model/PatternDatabase/PatternDatabase.h"
+#include "../PatternDatabases/CornerPatternDatabase.h"
 
 #ifndef IDASTARSOLVER_H
 #define IDASTARSOLVER_H

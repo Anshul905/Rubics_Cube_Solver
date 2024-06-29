@@ -1,17 +1,19 @@
 #include <bits/stdc++.h>
-
-#include "PatternDatabases/CornerPatternDatabase.h"
-
-
 using namespace std ;
+
+
 
 #include "Model/RubicsCube3dArray.cpp"
 #include "Model/RubicsCube1dArray.cpp"
-#include "Model/RubicsCubeBitBoard.cpp"
+// #include "Model/RubicsCubeBitBoard.cpp"
 #include "Solver/DFSSolver.h"
 #include "Solver/BFSSolver.h"
 #include "Solver/IDDFSSolver.h"
 #include "Solver/IDASTARSolver.h"
+
+#include "PatternDatabases/CornerPatternDatabase.h"
+#include "PatternDatabases/CornerDBMaker.h"
+
 
 int main()
 {
@@ -566,37 +568,186 @@ int main()
 
 
 
-    // CornerPatternDatabase Testing ---------------------------------------------------------------------------------
+    // // CornerPatternDatabase Testing ---------------------------------------------------------------------------------
+    //
+    // CornerPatternDatabase cornerDB;
+    // RubiksCubeBitboard cube;
+    //
+    // cube.print();
+    // cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    //
+    // cornerDB.setNumMoves(cube, 5);
+    // cube.print();
+    // cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    //
+    // cube.randomShuffleCube(1);
+    // cube.print();
+    // cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    //
+    // cornerDB.setNumMoves(cube, 6);
+    // cube.print();
+    // cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    //
+    // cube.randomShuffleCube(10);
+    // cube.print();
+    // cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    //
+    // cornerDB.setNumMoves(cube, 8);
+    // cube.print();
+    // cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    //
+    // cube.randomShuffleCube(3);
+    // cube.print();
+    // cout << (int)cornerDB.getNumMoves(cube) << "\n";
 
-    CornerPatternDatabase cornerDB;
+
+
+
+
+    // CornerDBMaker Testing --------------------------------------------------------------------------
+
+    string fileName = "C:\\Users\\HP\\CLionProjects\\Rubics-Cube-Solver\\Databases\\cornerDepth5V1.txt" ;
+
+    // Code to create Corner Database
+    CornerDBMaker dbMaker(fileName, 0x99);
+    dbMaker.bfsAndStore();
+
     RubiksCubeBitboard cube;
+    int suffleTime = 13  ;
 
-    cube.print();
-    cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    auto shuffleMoves = cube.randomShuffleCube(suffleTime);
+    // cube.print();
 
-    cornerDB.setNumMoves(cube, 5);
-    cube.print();
-    cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    for (auto move: shuffleMoves) cout << cube.getMove(move) << " ";
+    cout << "\n";
 
-    cube.randomShuffleCube(1);
-    cube.print();
-    cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    IDAstarSolver<RubiksCubeBitboard, HashBitboard> idaStarSolver(cube, fileName);
+    auto solve_moves = idaStarSolver.solve();
 
-    cornerDB.setNumMoves(cube, 6);
-    cube.print();
-    cout << (int)cornerDB.getNumMoves(cube) << "\n";
 
-    cube.randomShuffleCube(10);
-    cube.print();
-    cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    cout << "Cube is solved in " << solve_moves.size() << " moves." << endl ;
+    cout << "Moves are : { " ;
+    for (auto move: solve_moves) cout << cube.getMove(move) << " ";
+    cout << "}\n";
 
-    cornerDB.setNumMoves(cube, 8);
-    cube.print();
-    cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    // idaStarSolver.rubiksCube.print();
 
-    cube.randomShuffleCube(3);
-    cube.print();
-    cout << (int)cornerDB.getNumMoves(cube) << "\n";
+    cube = idaStarSolver.rubiksCube ;
+    if ( cube.isSolved()) cout << "SOLVED\n\n";
+    else cout << "NOT SOLVED\n\n";
+
+
+    // depth while creating the database = 6
+    // suffleTime = 11
+
+    // B' F' B2 U2 L D2 D F R L' D
+    // Cube is solved in 9 moves.
+    // Moves are : { D' L R' F' D L' U2 F B' }
+    // SOLVED
+
+    // B U' R2 F R L' B2 B' L' L B2
+    // Cube is solved in 7 moves.
+    // Moves are : { B L R' F' R2 U B' }
+    // SOLVED
+
+    // F U2 F F L' F' B B B2 F2 B
+    // Cube is solved in 6 moves.
+    // Moves are : { F' B' L F2 U2 F' }
+    // SOLVED
+
+    // D U U2 L2 R2 L' R2 U U U L'
+    // Cube is solved in 5 moves.
+    // Moves are : { L U L' U D' }
+    // SOLVED
+
+    // R2 B R' F F' F2 R2 R2 F2 R' B
+    // Cube is solved in 4 moves.
+    // Moves are : { B' R2 B' R2 }
+    // SOLVED
+
+
+
+    // depth while creating the database = 6
+    // suffleTime = 12
+
+    // B' L R2 F R' L' U2 U' F2 B2 R U'
+    // Cube is solved in 11 moves.
+    // Moves are : { U R' B2 F2 U' R L F' L' R2 B }
+    // SOLVED
+
+    // U2 L F' F F D U' B' D2 L2 D2 R2
+    // Cube is solved in 10 moves.
+    // Moves are : { R2 D2 L2 D2 B U D' F' L' U2 }
+    // SOLVED
+
+    // F2 L D L2 L' D L' D B D2 D D'
+    // Cube is solved in 9 moves.
+    // Moves are : { D2 B' D' L D' L' D' L' F2 }
+    // SOLVED
+
+    // L B2 B B' F' R U R F F2 U' U
+    // Cube is solved in 7 moves.
+    // Moves are : { F R' U' R' F B2 L' }
+    // SOLVED
+
+    // F2 F U U' B2 D L R' L' F2 B F
+    // Cube is solved in 6 moves.
+    // Moves are : { B' F R D' F B2 }
+    // SOLVED
+
+
+
+
+    // depth while creating the database = 6
+    // suffleTime = 13
+
+    // L L2 L' B D' L2 D R' R2 B2 U' L' U
+    // Cube is solved in 10 moves.
+    // Moves are : { U' L U B2 R' D' L2 D B' L2 }
+    // SOLVED
+
+    // F R2 B2 R2 L R U' D D D2 R' U L2
+    // Cube is solved in 9 moves.
+    // Moves are : { L2 U' R U R L' B2 R2 F' }
+    // SOLVED
+
+    // F R2 D2 R' R F2 L' R F' R' R F L'
+    // Cube is solved in 6 moves.
+    // Moves are : { R' L2 F2 D2 R2 F' }
+    // SOLVED
+
+
+
+
+    // depth while creating the database = 7
+    // suffleTime = 11
+
+    // D' U' D' F2 L B2 D2 D' U2 L
+    // Cube is solved in 8 moves.
+    // Moves are : { L' D' U2 B2 L' F2 U D2 }
+    // SOLVED
+
+
+
+    // depth while creating the database = 7
+    // suffleTime = 12
+
+    // L' L' B L F L' L L' U F2 R2 L'
+    // Cube is solved in 9 moves.
+    // Moves are : { R2 L F2 U' L F' L' B' L2 }
+    // SOLVED
+
+
+
+    // depth while creating the database = 7
+    // suffleTime = 13
+
+    // F U2 B2 U2 F B F2 L2 B2 U2 D R2 R'
+    // Cube is solved in 5 moves.
+    // Moves are : { R' U2 D' L2 B' }
+    // SOLVED
+
+
 
 
     return 0;

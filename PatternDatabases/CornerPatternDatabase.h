@@ -2,13 +2,16 @@
 // Created by ANSHUL KUMAR NEEKHARA on 29-06-2024.
 //
 
-#ifndef CORNERPATTERNDATABASE_H
-#define CORNERPATTERNDATABASE_H
+
+#include <bits/stdc++.h>
+using namespace std;
 
 #include "../Model/GenericRubicsCube.h"
 #include "PatternDatabase.h"
 #include "PermutationIndexer.h"
-using namespace std;
+
+#ifndef CORNERPATTERNDATABASE_H
+#define CORNERPATTERNDATABASE_H
 
 class CornerPatternDatabase : public PatternDatabase {
 
@@ -19,7 +22,7 @@ class CornerPatternDatabase : public PatternDatabase {
 public:
     CornerPatternDatabase();
     CornerPatternDatabase(uint8_t init_val);
-    uint32_t getDatabaseIndex(const GenericRubicsCube& cube) const;
+    uint32_t getDatabaseIndex(const GenericRubicsCube& cube) const ;
 
 };
 #endif //CORNERPATTERNDATABASE_H

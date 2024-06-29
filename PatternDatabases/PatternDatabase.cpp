@@ -1,7 +1,7 @@
 //
 // Created by ANSHUL KUMAR NEEKHARA on 29-06-2024.
 //
-
+#include<bits/stdc++.h>
 #include "PatternDatabase.h"
 
 using namespace std;
@@ -41,7 +41,7 @@ uint8_t PatternDatabase::getNumMoves(const uint32_t ind) const {
     return this->database.get(ind);
 }
 
-uint8_t PatternDatabase::getNumMoves(const GenericRubicsCube &cube) const {
+uint8_t PatternDatabase:: getNumMoves(const GenericRubicsCube &cube) const {
     return this->getNumMoves(this->getDatabaseIndex(cube));
 }
 
@@ -58,19 +58,60 @@ bool PatternDatabase::isFull() const {
 }
 
 void PatternDatabase::toFile(const string &filePath) const {
+    cout << "toFile Started" << endl;
 
-    ofstream writer(filePath, ios::out | ios::binary | ios::trunc);
+    cout<<  filePath << endl ;
 
-    if(!writer.is_open())
-        throw "Failed to open the file to write";
+    try {
 
-    writer.write(
-            reinterpret_cast<const char*>(this->database.data()),
-            this->database.storageSize()
-            );
+        // Check if directory exists, if not create it
+        filesystem::path dir = filesystem::path(filePath).parent_path();
+        if (!filesystem::exists(dir)) {
+            cout << "Creating directory and file..." << endl;
+            filesystem::create_directories(dir);
+        }
 
-    writer.close();
+        ofstream writer(filePath, ios::out | ios::binary | ios::trunc);
+
+        // Check if file was successfully opened
+        if (!writer.is_open()) {
+            throw runtime_error("Failed to open the file for writing: " + filePath);
+         }
+
+        // writing the data into file
+        writer.write( reinterpret_cast<const char*>(this->database.data()),
+                this->database.storageSize() );
+
+        if (!writer) {
+            throw runtime_error("Failed to write data to the file: " + filePath);
+        }
+
+        cout << "Database is created." << endl;
+
+    } catch (const runtime_error& e) {
+        cerr << "Caught runtime error: " << e.what() << endl;
+    } catch (const exception& e) {
+        cerr << "Caught exception: " << e.what() << endl;
+    } catch (...) {
+        cerr << "Caught unknown exception" << endl;
+    }
+
 }
+
+// void PatternDatabase::toFile(const string &filePath) const {
+//
+//     ofstream writer(filePath, ios::out | ios::binary | ios::trunc);
+//     if(!writer.is_open()) {
+//         throw "Failed to open the file to write";
+//     }
+//     writer.write(
+//             reinterpret_cast<const char*>(this->database.data()),
+//             this->database.storageSize()
+//             );
+//     writer.close();
+// }
+
+
 
 // Returns true of database is loaded successfully
 // else return false
